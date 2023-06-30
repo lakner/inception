@@ -4,5 +4,12 @@ services:
     build: ./mariadb
   nginx:
     build: ./nginx
+    volumes: 
+      - wordpress_data:/usr/share/nginx/slakner.
   wordpress:
     build: ./wordpress
+      - wordpress_data:/wordpress
+      
+
+volumes:
+  wordpresss_data:
