@@ -9,7 +9,6 @@ services:
   wordpress:
     build: ./wordpress
       - wordpress_data:/wordpress
-      
 
 volumes:
   wordpresss_data:
