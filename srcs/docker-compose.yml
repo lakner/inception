@@ -6,6 +6,8 @@ services:
     build: ./nginx
     volumes: 
       - wordpress_data:/usr/share/nginx/slakner.
+    ports:
+      - 443:443
   wordpress:
     build: ./wordpress
       - wordpress_data:/wordpress
