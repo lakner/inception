@@ -1,16 +1,21 @@
 ---
 services:
   mariadb:
-    build: ./mariadb
+    build: ./requirements/mariadb
+    expose: # expose allows access to 3306 only for other containers
+      - "3306"
   nginx:
-    build: ./nginx
+    build: ./requirements/nginx
     volumes: 
-      - wordpress_data:/usr/share/nginx/slakner.
+      - wordpress_data:/usr/share/nginx/
     ports:
       - 443:443
   wordpress:
-    build: ./wordpress
+    build: ./requirements/wordpress
+    volumes:
       - wordpress_data:/wordpress
+    expose:
+      - "9000"
 
 volumes:
-  wordpresss_data:
+  wordpress_data:
