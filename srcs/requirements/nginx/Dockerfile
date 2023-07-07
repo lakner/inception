@@ -12,6 +12,7 @@ RUN echo "Creating self-signed certificate valid for ${DAYS_VALID} days for doma
     -days ${DAYS_VALID} -newkey rsa:4096 -keyout /etc/ssl/private/${DOMAIN_NAME}.key -out /etc/ssl/certs/${DOMAIN_NAME}.crt
 
 COPY conf/slakner.42.fr.conf /etc/nginx/sites-available/default
+RUN rm -rf /var/www/
 
 EXPOSE 80
 EXPOSE 443

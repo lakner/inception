@@ -1,55 +1,29 @@
 ---
-version: "3"
+version: '3'
 
 services:
   mariadb:
     build: ./requirements/mariadb
     env_file: ./.env
-    # environment:
-    #   - DB_USER=${DB_USER}
-    #   - DB_PASS=${DB_PASS}
-    #   - DB_NAME=${DB_NAME}
-    # expose: # expose allows access to 3306 only for other containers
-    #   - "3306"
     restart: unless-stopped
     volumes: 
       - database:/var/lib/mysql
-    # networks:
-    #   containers:
-    #     aliases:
-    #       - mariadb
   nginx:
     build: ./requirements/nginx
     volumes: 
-      - wordpress_data:/usr/share/nginx/
+      - wordpress_data:/var/www/html
     ports:
-      - 443:443
+      - 2323:443
     restart: unless-stopped
-    # networks:
-    #   - containers
+
   wordpress:
     build: ./requirements/wordpress
     volumes:
       - wordpress_data:/wordpress
-    # expose:
-    #   - "9000"
     depends_on:
       - mariadb
       - nginx
     env_file: ./.env
-    # environment:
-    #   - DB_USER = ${DB_USER}
-    #   - DB_PASS = ${DB_PASS}
-    #   - DB_NAME = ${DB_NAME}
-    #restart: unless-stopped
-
-
-    # networks:
-    #   - containers
-
 volumes:
   wordpress_data:
   database:
-
-# networks:
-#   containers:
