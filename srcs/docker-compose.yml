@@ -4,6 +4,11 @@ version: "3"
 services:
   mariadb:
     build: ./requirements/mariadb
+    env_file: ./.env
+    # environment:
+    #   - DB_USER=${DB_USER}
+    #   - DB_PASS=${DB_PASS}
+    #   - DB_NAME=${DB_NAME}
     # expose: # expose allows access to 3306 only for other containers
     #   - "3306"
     restart: unless-stopped
@@ -31,6 +36,11 @@ services:
     depends_on:
       - mariadb
       - nginx
+    env_file: ./.env
+    # environment:
+    #   - DB_USER = ${DB_USER}
+    #   - DB_PASS = ${DB_PASS}
+    #   - DB_NAME = ${DB_NAME}
     #restart: unless-stopped
 
 
