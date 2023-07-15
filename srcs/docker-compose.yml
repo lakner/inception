@@ -12,6 +12,8 @@ services:
     build: ./requirements/nginx
     volumes: 
       - wordpress_data:/var/www/html
+    depends_on:
+      - wordpress
     ports:
       - 2323:443
     restart: unless-stopped
@@ -22,7 +24,6 @@ services:
       - wordpress_data:/wordpress
     depends_on:
       - mariadb
-      - nginx
     env_file: ./.env
 volumes:
   wordpress_data:
