@@ -1,21 +1,24 @@
 #! /usr/bin/env /bin/bash
-mkdir -p /wordpress && chown -R www-data:www-data /wordpress 
-cd /wordpress
+mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html 
+cd /var/www/html
 
 # wget https://wordpress.org/latest.zip
 # echo "---Unzipping archive---"
 # unzip latest.zip -d /wordpress/slakner.42.fr
-chown -R www-data:www-data /wordpress
-if ! sudo -u www-data wp core is-installed --path=/wordpress; then
+if ! sudo -u www-data wp core is-installed --path=/var/www/html; then
 	echo "---Downloading wordpress---"
-	sudo -u www-data wp core download --path=/wordpress
+	sudo -u www-data wp core download --path=/var/www/html
 	sudo -u www-data wp config create --dbhost=mariadb --dbname=${DB_NAME} --dbuser=${DB_USER} --dbpass=${DB_PASS} --allow-root --force
 	echo "---Installing wordpress---"
 	sudo -u www-data wp core install --url==${WP_URL} --title=slakner --admin_user=root --admin_password=root --admin_email=admin@slakner.42.fr
 else
 	echo "---Wordpress already installed, skipping installation---"
 fi
-#sudo -u www-data wp db create --allow-root --path=/wordpress/slakner.42.fr --dbuser=${DB_USER} --dbpass=${DB_PASS}
+#sudo -u www-data wp db create --allow-root --path=/var/www/html/slakner.42.fr --dbuser=${DB_USER} --dbpass=${DB_PASS}
+
+echo "define( 'HTTP_HOST', 'nginx' );" >> /var/www/html/wp-config.php
+echo "define( 'WP_SITEURL', 'https://' . $_SERVER['HTTP_HOST'] );" >> /var/www/html/wp-config.php
+echo "define( 'WP_HOME',    'https://' . $_SERVER['HTTP_HOST'] );" >> /var/www/html/wp-config.php
 
 #php wp --info
 #tail -f
