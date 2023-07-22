@@ -14,6 +14,8 @@ if ! sudo -u www-data wp core is-installed --path=/var/www/html; then
 	echo "define( 'HTTP_HOST', 'nginx' );" >> /var/www/html/wp-config.php
 	echo "define( 'WP_SITEURL', 'https://${WP_URL}' );" >> /var/www/html/wp-config.php
 	echo "define( 'WP_HOME', 'https://${WP_URL}' );" >> /var/www/html/wp-config.php
+	echo "define( 'CONCATENATE_SCRIPTS', false );" >> /var/www/html/wp-config.php
+	echo "define( 'SCRIPT_DEBUG', true );" >> /var/www/html/wp-config.php
 else
 	echo "---Wordpress already installed, skipping installation---"
 fi
