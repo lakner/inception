@@ -3,7 +3,7 @@
 include .env
 export DOCKER_PROJECT = ${PROJECT_NAME}
 
-all: build
+all: docker compose up -d
 
 kill:
 	docker compose kill
@@ -13,3 +13,6 @@ build:
 
 down:
 	docker compose down
+
+re:
+	docker system prune && docker volume prune && docker build --no-cache && docker-compose up -d
