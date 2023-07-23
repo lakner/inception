@@ -8,11 +8,11 @@ if ! sudo -u www-data wp core is-installed --path=/var/www/html; then
 	sudo -u www-data wp config create --dbhost=mariadb --dbname=${DB_NAME} --dbuser=${DB_USER} --dbpass=${DB_PASS} --allow-root --force
 	echo "---Installing wordpress---"
 	sudo -u www-data wp core install --url==${WP_URL} --title=slakner --admin_user=${ADMIN_USER} --admin_password=${ADMIN_PASS} --admin_email=admin@slakner.42.fr
-	echo "define( 'HTTP_HOST', 'nginx' );" >> /var/www/html/wp-config.php
-	echo "define( 'WP_SITEURL', 'https://${WP_URL}' );" >> /var/www/html/wp-config.php
-	echo "define( 'WP_HOME', 'https://${WP_URL}' );" >> /var/www/html/wp-config.php
-	echo "define( 'CONCATENATE_SCRIPTS', false );" >> /var/www/html/wp-config.php
-	echo "define( 'SCRIPT_DEBUG', true );" >> /var/www/html/wp-config.php
+	sudo -u www-data wp config set HTTP_HOST 'nginx'
+	sudo -u www-data wp config set WP_SITEURL "https://${WP_URL}"
+	sudo -u www-data wp config set WP_HOME "https://${WP_URL}"
+	sudo -u www-data wp config set CONCATENATE_SCRIPTS false
+	sudo -u www-data wp config set SCRIPT_DEBUG true
 else
 	echo "---Wordpress already installed, skipping installation---"
 fi
