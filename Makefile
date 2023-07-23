@@ -15,11 +15,15 @@ build:
 down:
 	docker-compose -f ./srcs/docker-compose.yml down
 
-clean:
-	docker system prune
+clean: down
+	docker image rm srcs_nginx || true
+	docker image rm srcs_wordpress || true
+	docker image rm srcs_mariadb || true
+	docker system prune -f --all
+
 
 fclean: clean
-	docker volume prune
+	docker volume prune -f --filter "label=src_*"
 
 re: fclean
 	docker-compose -f ./srcs/docker-compose.yml build --no-cache
