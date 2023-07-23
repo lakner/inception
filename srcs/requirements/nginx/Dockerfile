@@ -1,7 +1,7 @@
 FROM debian:stable
 
 RUN apt update \
-	&& apt install -y nginx openssl libfcgi-bin\
+	&& apt install -y nginx openssl \
 	&& rm -rf /var/lib/apt/lists/*
 
 ARG DAYS_VALID=42
