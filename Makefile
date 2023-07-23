@@ -1,18 +1,26 @@
 .PHONY: kill build down
 
-include .env
+include ./srcs/.env
 export DOCKER_PROJECT = ${PROJECT_NAME}
 
-all: docker compose up -d
+all: 
+	docker-compose -f ./srcs/docker-compose.yml up -d
 
 kill:
-	docker compose kill
+	docker-compose -f ./srcs/docker-compose.yml kill
 
 build:
-	docker compose up -d --build
+	docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 down:
-	docker compose down
+	docker-compose -f ./srcs/docker-compose.yml down
 
-re:
-	docker system prune && docker volume prune && docker build --no-cache && docker-compose up -d
+clean:
+	docker system prune
+
+fclean: clean
+	docker volume prune
+
+re: fclean
+	docker-compose -f ./srcs/docker-compose.yml build --no-cache
+	docker-compose -f ./srcs/docker-compose.yml up -d
