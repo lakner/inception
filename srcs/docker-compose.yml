@@ -39,4 +39,4 @@ volumes:
   database:
 
 networks:
-  default:
+  inception_network:
