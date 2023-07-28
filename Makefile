@@ -3,6 +3,7 @@
 include ./srcs/.env
 
 all: 
+	mkdir -p /home/slakner/data
 	mkdir -p /home/slakner/data/wordpress
 	mkdir -p /home/slakner/data/mariadb
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d
