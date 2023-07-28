@@ -36,7 +36,17 @@ services:
 
 volumes:
   wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/slakner/data/wordpress
+      o: bind
   database:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/slakner/data/mariadb
+      o: bind
 
 networks:
   inception_network:

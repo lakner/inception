@@ -1,9 +1,10 @@
 .PHONY: kill build down
 
 include ./srcs/.env
-export DOCKER_PROJECT = ${PROJECT_NAME}
 
 all: 
+	mkdir -p /home/slakner/data/wordpress
+	mkdir -p /home/slakner/data/mariadb
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d
 
 kill:
