@@ -12,8 +12,8 @@ RUN apt update \
 	&& wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +rw /var/lib/php/sessions
 RUN chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
-COPY conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
-COPY conf/php.ini /etc/php/8.2/fpm/php.ini
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+COPY conf/php.ini /etc/php/7.4/fpm/php.ini
 COPY wordpress_startup.sh /wordpress_startup.sh
 RUN chmod +x /wordpress_startup.sh
 CMD ["/wordpress_startup.sh"]

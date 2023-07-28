@@ -17,4 +17,5 @@ if ! sudo -u www-data wp core is-installed --path=/var/www/html; then
 else
 	echo "---Wordpress already installed, skipping installation---"
 fi
-exec /usr/sbin/php-fpm8.2 -F --allow-to-run-as-root
+mkdir -p /run/php
+exec /usr/sbin/php-fpm7.4 -F --allow-to-run-as-root
