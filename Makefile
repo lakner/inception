@@ -26,6 +26,4 @@ fclean: clean
 	sudo docker image rm srcs_mariadb || true
 	sudo docker volume prune -f --filter "label=src_*"
 
-re: fclean
-	sudo docker-compose -f ./srcs/docker-compose.yml build --no-cache
-	sudo docker-compose -f ./srcs/docker-compose.yml up -d
+re: fclean all
