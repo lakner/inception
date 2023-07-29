@@ -13,7 +13,7 @@ if ! sudo -u www-data wp core is-installed --path=/var/www/html; then
 	sudo -u www-data wp config set WP_HOME "https://${WP_URL}"
 	sudo -u www-data wp config set CONCATENATE_SCRIPTS false
 	sudo -u www-data wp config set SCRIPT_DEBUG true
-	sudo -u www-data wp user create ${WP_USER} ${WP_USER_EMAIL} --user-pass=${WP_PASS}
+	sudo -u www-data wp user create ${WP_USER} ${WP_USER_EMAIL} --user_pass=${WP_PASS}
 else
 	echo "---Wordpress already installed, skipping installation---"
 fi
